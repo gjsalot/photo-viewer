@@ -9,5 +9,5 @@
 import UIKit
 
 protocol PhotoFeedViewInterface {
-
+    func update(viewModel: PhotoFeedViewModel)
 }

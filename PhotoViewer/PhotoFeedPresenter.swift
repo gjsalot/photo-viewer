@@ -21,8 +21,9 @@ class PhotoFeedPresenter: NSObject, PhotoFeedViewEventHandler {
     }
     
     func viewDidLoad() {
-        interactor.getPhotos(count: 36, offset: 0) { (photos) in
-            self.photos.append(contentsOf: photos)
+        interactor.getPhotos(count: 36, offset: 0) { [weak self] (photos) in
+            self?.photos.append(contentsOf: photos)
+            self?.userInterface.update(viewModel: PhotoFeedViewModel(photos: photos))
         }
     }
 }

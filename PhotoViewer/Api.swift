@@ -15,7 +15,9 @@ class Api: NSObject {
         let parameters : Parameters = [
             "feature" : "popular",
             "image_size": 440,
-            "consumer_key": "GZNieDdpg0cYPHe52kRK1OmWQYvPX3rYxtt98Ajh"
+            "consumer_key": "GZNieDdpg0cYPHe52kRK1OmWQYvPX3rYxtt98Ajh",
+            "rpp": count,
+            "offset": offset
         ]
         
         Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default)
