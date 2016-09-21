@@ -9,5 +9,15 @@
 import UIKit
 
 class PhotoFeedInteractor: NSObject {
+    let api : Api
     
+    init(api: Api) {
+        self.api = api
+    }
+    
+    func getPhotos(count: Int, offset: Int, completion: @escaping (_ photos: [Photo]) -> ()) {
+        Api().get500pxPhotos(count: count, offset: offset) { (photos) in
+            completion(photos)
+        }
+    }
 }

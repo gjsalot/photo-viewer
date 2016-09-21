@@ -16,7 +16,7 @@ class Router: NSObject {
     static func getPhotoFeedViewController() -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let viewController = storyboard.instantiateViewController(withIdentifier: "PhotoFeedViewController") as! PhotoFeedViewController
-        let interactor = PhotoFeedInteractor()
+        let interactor = PhotoFeedInteractor(api: Api())
         let presenter = PhotoFeedPresenter(interactor: interactor, userInterface: viewController)
         viewController.eventHandler = presenter
         
