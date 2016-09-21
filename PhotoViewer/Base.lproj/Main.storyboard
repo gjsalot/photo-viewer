@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hUW-iy-HkM">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="DdV-0D-etq">
+            <objects>
+                <navigationController id="hUW-iy-HkM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="e2y-3Y-Tf8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dDa-62-vOR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-684" y="-81"/>
+        </scene>
         <!--Photo Feed-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -49,6 +63,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="308.69565217391306" y="-80.706521739130437"/>
+        </scene>
+        <!--Fullscreen Photo Feed View Controller-->
+        <scene sceneID="CII-zw-Cvw">
+            <objects>
+                <viewController storyboardIdentifier="FullscreenPhotoFeedViewController" id="Vy7-ZW-WZj" customClass="FullscreenPhotoFeedViewController" customModule="PhotoViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kOw-6d-3Vn"/>
+                        <viewControllerLayoutGuide type="bottom" id="tMQ-EB-BLO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7AL-1a-S7r">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="K4K-gq-PBZ">
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="x0J-mm-fwk">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Vy7-ZW-WZj" id="V7D-MH-eGt"/>
+                                    <outlet property="delegate" destination="Vy7-ZW-WZj" id="fU8-6z-ks3"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tMQ-EB-BLO" firstAttribute="top" secondItem="K4K-gq-PBZ" secondAttribute="bottom" id="543-I5-dfN"/>
+                            <constraint firstItem="K4K-gq-PBZ" firstAttribute="top" secondItem="kOw-6d-3Vn" secondAttribute="bottom" constant="-20" id="CxM-Vb-nag"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="K4K-gq-PBZ" secondAttribute="trailing" constant="-16" id="rUK-O7-w0a"/>
+                            <constraint firstItem="K4K-gq-PBZ" firstAttribute="leading" secondItem="7AL-1a-S7r" secondAttribute="leadingMargin" constant="-16" id="zOg-3I-1XN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="K4K-gq-PBZ" id="GxT-W8-TaW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gx6-oG-mgh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1234.4000000000001" y="-81.409295352323838"/>
         </scene>
     </scenes>
 </document>

@@ -9,21 +9,30 @@
 import UIKit
 
 class PhotoFeedPresenter: NSObject, PhotoFeedViewEventHandler {
-    let photosPerPage = 36
+    private let interactor : PhotoFeedInteractor
+    private let userInterface : PhotoFeedViewInterface
+    private let router : PhotoFeedRouter
     
-    let interactor : PhotoFeedInteractor
-    let userInterface : PhotoFeedViewInterface
-    var photos = [Photo]()
-    
-    init(interactor : PhotoFeedInteractor, userInterface : PhotoFeedViewInterface) {
+    init(interactor : PhotoFeedInteractor, userInterface : PhotoFeedViewInterface, router: PhotoFeedRouter) {
         self.interactor = interactor
         self.userInterface = userInterface
+        self.router = router
     }
     
+    // MARK: PhotoFeedViewEventHandler
+    
     func viewDidLoad() {
-        interactor.getPhotos(count: 36, offset: 0) { [weak self] (photos) in
-            self?.photos.append(contentsOf: photos)
-            self?.userInterface.update(viewModel: PhotoFeedViewModel(photos: photos))
+        self.interactor.loadMorePhotos { [weak self] (photos) in
+            self?.userInterface.showPhotos(photos: photos)
         }
+    }
+    
+    func photoTappedAtIndex(index: Int) {
+        self.router.presentFullscreenPhotoFeed(initialPhotoIndex: index)
+    }
+    
+    func fullscreenPhotoFeedDismissed(finalPhotoIndex: Int) {
+        self.userInterface.showPhotos(photos: self.interactor.photos)
+        self.userInterface.makeIndexVisible(index: finalPhotoIndex)
     }
 }

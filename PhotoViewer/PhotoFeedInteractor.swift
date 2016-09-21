@@ -9,15 +9,22 @@
 import UIKit
 
 class PhotoFeedInteractor: NSObject {
-    let api : Api
+    private let photosPerPage = 36
+    
+    private let api : Api
+    var photos = [Photo]()
     
     init(api: Api) {
         self.api = api
     }
     
-    func getPhotos(count: Int, offset: Int, completion: @escaping (_ photos: [Photo]) -> ()) {
-        Api().get500pxPhotos(count: count, offset: offset) { (photos) in
-            completion(photos)
+    func loadMorePhotos(completion: @escaping (_ photos: [Photo]) -> ()) {
+        let page = photos.count / photosPerPage + 1
+        self.api.get500pxPhotos(pageSize: photosPerPage, page: page) { [weak self] (photos) in
+            if let strongSelf = self {
+                strongSelf.photos.append(contentsOf: photos)
+                completion(strongSelf.photos)
+            }
         }
     }
 }

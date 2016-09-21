@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var eventHandler : PhotoFeedViewEventHandler?
-    var viewModel : PhotoFeedViewModel?
+    var photos: [Photo]?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -22,21 +22,27 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
         eventHandler?.viewDidLoad()
     }
     
-    func update(viewModel: PhotoFeedViewModel) {
-        self.viewModel = viewModel
-        
+    // MARK: PhotoFeedViewInterface
+    
+    func showPhotos(photos: [Photo]) {
+        self.photos = photos
         self.collectionView.reloadData()
+    }
+    
+    func makeIndexVisible(index: Int) {
+        self.collectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredVertically, animated: false)
     }
 
     // MARK: UICollectionViewDataSource
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.photos.count ?? 0
+        return self.photos?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoFeedCollectionViewCell", for: indexPath) as! PhotoFeedCollectionViewCell
         
-        cell.setPhoto(photo: viewModel!.photos[indexPath.row])
+        cell.setPhoto(photo: self.photos![indexPath.row])
         
         return cell
     }
@@ -47,6 +53,12 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
+        
+        eventHandler?.photoTappedAtIndex(index: indexPath.row)
     }
 }
 

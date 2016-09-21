@@ -1,5 +1,5 @@
 //
-//  PhotoFeedViewEventHandler.swift
+//  FullscreenPhotoFeedViewEventHandler.swift
 //  PhotoViewer
 //
 //  Created by Grant Sutcliffe on 2016-09-21.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol PhotoFeedViewEventHandler {
+protocol FullscreenPhotoFeedViewEventHandler {
     func viewDidLoad()
+    func viewDidLayoutSubviews()
     func photoTappedAtIndex(index: Int)
-    func fullscreenPhotoFeedDismissed(finalPhotoIndex: Int)
 }

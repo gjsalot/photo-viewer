@@ -10,14 +10,14 @@ import UIKit
 import Alamofire
 
 class Api: NSObject {
-    func get500pxPhotos(count: Int, offset: Int, completion: @escaping (_ photos: [Photo]) -> ()) {
+    func get500pxPhotos(pageSize: Int, page: Int, completion: @escaping (_ photos: [Photo]) -> ()) {
         let url = "https://api.500px.com/v1/photos"
         let parameters : Parameters = [
             "feature" : "popular",
             "image_size": 440,
             "consumer_key": "GZNieDdpg0cYPHe52kRK1OmWQYvPX3rYxtt98Ajh",
-            "rpp": count,
-            "offset": offset
+            "rpp": pageSize,
+            "page": page
         ]
         
         Alamofire.request(url, method: .get, parameters: parameters, encoding: URLEncoding.default)
