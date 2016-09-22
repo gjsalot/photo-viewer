@@ -14,6 +14,9 @@ class FullscreenPhotoFeedCollectionViewCell: UICollectionViewCell {
     
     func setPhoto(photo: Photo) {
         imageView.image = nil
-        imageView.af_setImage(withURL: URL(string: photo.imageUrl)!)
+        
+        // Load the smaller, already cached, image first
+        imageView.af_setImage(withURL: photo.assetsBySize[.cropped440]!.url)
+        imageView.af_setImage(withURL: photo.assetsBySize[.uncropped1080]!.url)
     }
 }

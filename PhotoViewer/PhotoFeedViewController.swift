@@ -32,6 +32,13 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
     func makeIndexVisible(index: Int) {
         self.collectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredVertically, animated: false)
     }
+    
+    func rectForCell(atIndex: Int) -> CGRect {
+        let attributes = self.collectionView.layoutAttributesForItem(at: IndexPath(row: atIndex, section: 0))!
+        let attributesFrame = attributes.frame
+        let frame = self.collectionView.convert(attributesFrame, to: self.collectionView.superview?.superview)
+        return frame
+    }
 
     // MARK: UICollectionViewDataSource
     
@@ -58,7 +65,11 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
         
-        eventHandler?.photoTappedAtIndex(index: indexPath.row)
+        let attributes = collectionView.layoutAttributesForItem(at: indexPath)
+        let attributesFrame = attributes?.frame
+        let frameToOpenFrom = collectionView.convert(attributesFrame!, to: collectionView.superview?.superview)
+        
+        self.eventHandler?.photoTapped(fromFrame: frameToOpenFrom, index: indexPath.row)
     }
 }
 

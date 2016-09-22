@@ -29,6 +29,10 @@
 		07B3B0AB1D93055700B797A8 /* FullscreenPhotoFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07B3B0A91D93055700B797A8 /* FullscreenPhotoFeedCollectionViewCell.xib */; };
 		07B3B0AF1D93216500B797A8 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3B0AE1D93216500B797A8 /* AppDependencies.swift */; };
 		07B3B0B11D932E9A00B797A8 /* PhotoFeedViewEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3B0B01D932E9A00B797A8 /* PhotoFeedViewEventHandler.swift */; };
+		07B3B0B41D93525B00B797A8 /* TransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3B0B31D93525B00B797A8 /* TransitioningDelegate.swift */; };
+		07B3B0B61D9352AA00B797A8 /* PresentationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3B0B51D9352AA00B797A8 /* PresentationAnimator.swift */; };
+		07B3B0B81D9352D400B797A8 /* DismissalAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B3B0B71D9352D400B797A8 /* DismissalAnimator.swift */; };
+		07DC4B1A1D94102A002C9B29 /* PhotoAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DC4B191D94102A002C9B29 /* PhotoAsset.swift */; };
 		24E2F6A565C433A520C45324 /* Pods_PhotoViewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3043817AF4F6B35AF1112639 /* Pods_PhotoViewer.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +61,10 @@
 		07B3B0A91D93055700B797A8 /* FullscreenPhotoFeedCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FullscreenPhotoFeedCollectionViewCell.xib; sourceTree = "<group>"; };
 		07B3B0AE1D93216500B797A8 /* AppDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		07B3B0B01D932E9A00B797A8 /* PhotoFeedViewEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoFeedViewEventHandler.swift; sourceTree = "<group>"; };
+		07B3B0B31D93525B00B797A8 /* TransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitioningDelegate.swift; sourceTree = "<group>"; };
+		07B3B0B51D9352AA00B797A8 /* PresentationAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationAnimator.swift; sourceTree = "<group>"; };
+		07B3B0B71D9352D400B797A8 /* DismissalAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissalAnimator.swift; sourceTree = "<group>"; };
+		07DC4B191D94102A002C9B29 /* PhotoAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAsset.swift; sourceTree = "<group>"; };
 		3043817AF4F6B35AF1112639 /* Pods_PhotoViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADE16900B7F5E6492E4AEF7C /* Pods-PhotoViewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoViewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoViewer/Pods-PhotoViewer.release.xcconfig"; sourceTree = "<group>"; };
 		AE05ED244B797A2D3D19E937 /* Pods-PhotoViewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoViewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoViewer/Pods-PhotoViewer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				07085C601D91F32200CBCC2F /* Photo.swift */,
+				07DC4B191D94102A002C9B29 /* PhotoAsset.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -179,6 +188,7 @@
 		0753F87C1D91AA7D00876312 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				07B3B0B21D93522D00B797A8 /* Animations */,
 				07085C661D922B7800CBCC2F /* PhotoFeedCell */,
 				0753F8661D91A54800876312 /* PhotoFeedViewController.swift */,
 				0753F8861D91B00500876312 /* PhotoFeedViewInterface.swift */,
@@ -216,6 +226,16 @@
 				07B3B0AE1D93216500B797A8 /* AppDependencies.swift */,
 			);
 			name = App;
+			sourceTree = "<group>";
+		};
+		07B3B0B21D93522D00B797A8 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				07B3B0B31D93525B00B797A8 /* TransitioningDelegate.swift */,
+				07B3B0B51D9352AA00B797A8 /* PresentationAnimator.swift */,
+				07B3B0B71D9352D400B797A8 /* DismissalAnimator.swift */,
+			);
+			name = Animations;
 			sourceTree = "<group>";
 		};
 		8CCD3414AD529A9C1B7BB8D0 /* Frameworks */ = {
@@ -360,18 +380,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07DC4B1A1D94102A002C9B29 /* PhotoAsset.swift in Sources */,
 				07B3B0AA1D93055700B797A8 /* FullscreenPhotoFeedCollectionViewCell.swift in Sources */,
 				0753F8671D91A54800876312 /* PhotoFeedViewController.swift in Sources */,
+				07B3B0B41D93525B00B797A8 /* TransitioningDelegate.swift in Sources */,
 				07B3B0B11D932E9A00B797A8 /* PhotoFeedViewEventHandler.swift in Sources */,
 				0753F8871D91B00500876312 /* PhotoFeedViewInterface.swift in Sources */,
 				0785BEC51D92DBC100BD6009 /* FullscreenPhotoFeedViewController.swift in Sources */,
 				0785BEBF1D92DB8D00BD6009 /* FullscreenPhotoFeedViewInterface.swift in Sources */,
+				07B3B0B61D9352AA00B797A8 /* PresentationAnimator.swift in Sources */,
 				0753F8831D91AF6100876312 /* PhotoFeedPresenter.swift in Sources */,
 				07085C641D922B6C00CBCC2F /* PhotoFeedCollectionViewCell.swift in Sources */,
 				07B3B0AF1D93216500B797A8 /* AppDependencies.swift in Sources */,
 				07085C611D91F32200CBCC2F /* Photo.swift in Sources */,
 				0785BEC11D92DB9900BD6009 /* FullscreenPhotoFeedViewEventHandler.swift in Sources */,
 				0785BEC91D92F3FC00BD6009 /* PhotoFeedRouter.swift in Sources */,
+				07B3B0B81D9352D400B797A8 /* DismissalAnimator.swift in Sources */,
 				0785BEBD1D92DB7000BD6009 /* FullscreenPhotoFeedPresenter.swift in Sources */,
 				0753F8811D91AB6E00876312 /* RootRouter.swift in Sources */,
 				0753F8651D91A54800876312 /* AppDelegate.swift in Sources */,

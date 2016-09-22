@@ -10,6 +10,5 @@ import UIKit
 
 protocol PhotoFeedViewEventHandler {
     func viewDidLoad()
-    func photoTappedAtIndex(index: Int)
-    func fullscreenPhotoFeedDismissed(finalPhotoIndex: Int)
+    func photoTapped(fromFrame: CGRect, index: Int)
 }

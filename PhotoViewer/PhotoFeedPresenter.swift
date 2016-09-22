@@ -27,12 +27,14 @@ class PhotoFeedPresenter: NSObject, PhotoFeedViewEventHandler {
         }
     }
     
-    func photoTappedAtIndex(index: Int) {
-        self.router.presentFullscreenPhotoFeed(initialPhotoIndex: index)
+    func photoTapped(fromFrame: CGRect, index: Int) {
+        self.router.presentFullscreenPhotoFeed(fromFrame: fromFrame, initialPhotoIndex: index)
     }
     
-    func fullscreenPhotoFeedDismissed(finalPhotoIndex: Int) {
+    func fullscreenPhotoFeedDismissedToRect(finalPhotoIndex: Int) -> CGRect {
         self.userInterface.showPhotos(photos: self.interactor.photos)
         self.userInterface.makeIndexVisible(index: finalPhotoIndex)
+        
+        return self.userInterface.rectForCell(atIndex: finalPhotoIndex)
     }
 }

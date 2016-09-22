@@ -12,6 +12,7 @@ class PhotoFeedRouter: NSObject {
     let rootRouter: RootRouter
     let api: Api
     let photoFeedInteractor : PhotoFeedInteractor
+    let transitionDelegate = TransitioningDelegate()
     
     weak var photoFeedViewController : PhotoFeedViewController!
     var photoFeedPresenter : PhotoFeedPresenter!
@@ -28,7 +29,7 @@ class PhotoFeedRouter: NSObject {
         self.rootRouter.showRootViewControllerInWindow(viewController: getPhotoFeedViewController(), window: window)
     }
     
-    func getPhotoFeedViewController() -> UIViewController {
+    private func getPhotoFeedViewController() -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         self.photoFeedViewController = storyboard.instantiateViewController(withIdentifier: "PhotoFeedViewController") as! PhotoFeedViewController
         self.photoFeedPresenter = PhotoFeedPresenter(interactor: photoFeedInteractor, userInterface: self.photoFeedViewController, router: self)
@@ -37,17 +38,24 @@ class PhotoFeedRouter: NSObject {
         return self.photoFeedViewController
     }
     
-    func presentFullscreenPhotoFeed(initialPhotoIndex: Int) {
+    func presentFullscreenPhotoFeed(fromFrame: CGRect, initialPhotoIndex: Int) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         self.fullscreenPhotoFeedViewController = storyboard.instantiateViewController(withIdentifier: "FullscreenPhotoFeedViewController") as! FullscreenPhotoFeedViewController
         self.fullscreenPhotoFeedPresenter = FullscreenPhotoFeedPresenter(interactor: photoFeedInteractor, userInterface: self.fullscreenPhotoFeedViewController, router: self, initialPhotoIndex: initialPhotoIndex)
         self.fullscreenPhotoFeedViewController.eventHandler = self.fullscreenPhotoFeedPresenter
         
+        // Setup custom animation with the frame to animate from
+        transitionDelegate.openingFrame = fromFrame
+        self.fullscreenPhotoFeedViewController.transitioningDelegate = transitionDelegate
+        self.fullscreenPhotoFeedViewController.modalPresentationStyle = .custom
+        
         self.photoFeedViewController.present(self.fullscreenPhotoFeedViewController, animated: true)
     }
     
     func dismissFullscreenPhotoFeedViewController(finalIndex: Int) {
+        // Get the frame of the cell for the photo at this index, and tell the animation to use it.
+        let closingFrame = self.photoFeedPresenter.fullscreenPhotoFeedDismissedToRect(finalPhotoIndex: finalIndex)
+        transitionDelegate.closingFrame = closingFrame
         self.photoFeedViewController.dismiss(animated: true)
-        self.photoFeedPresenter.fullscreenPhotoFeedDismissed(finalPhotoIndex: finalIndex)
     }
 }

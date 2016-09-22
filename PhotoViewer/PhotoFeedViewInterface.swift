@@ -11,4 +11,5 @@ import UIKit
 protocol PhotoFeedViewInterface {
     func showPhotos(photos: [Photo])
     func makeIndexVisible(index: Int)
+    func rectForCell(atIndex: Int) -> CGRect
 }

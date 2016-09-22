@@ -14,7 +14,7 @@ class Api: NSObject {
         let url = "https://api.500px.com/v1/photos"
         let parameters : Parameters = [
             "feature" : "popular",
-            "image_size": 440,
+            "image_size": "440,1080",
             "consumer_key": "GZNieDdpg0cYPHe52kRK1OmWQYvPX3rYxtt98Ajh",
             "rpp": pageSize,
             "page": page

@@ -9,12 +9,19 @@
 import UIKit
 
 class Photo: NSObject {
-    let imageUrl : String
     let width, height : Int
+    let assetsBySize : [PhotoSize : PhotoAsset]
     
     init(dictionary: NSDictionary) {
-        self.imageUrl = dictionary["image_url"] as! String? ?? ""
         self.width = dictionary.object(forKey: "width") as! Int? ?? 0
         self.height = dictionary.object(forKey: "height") as! Int? ?? 0
+        
+        let assets = dictionary.object(forKey: "images") as! [NSDictionary]
+        var assetsBySize = [PhotoSize : PhotoAsset]()
+        for asset in assets {
+            let photoAsset = PhotoAsset(dictionary: asset)
+            assetsBySize[photoAsset.size] = photoAsset
+        }
+        self.assetsBySize = assetsBySize
     }
 }
