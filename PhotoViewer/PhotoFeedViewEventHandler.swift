@@ -11,4 +11,5 @@ import UIKit
 protocol PhotoFeedViewEventHandler {
     func viewDidLoad()
     func photoTapped(fromFrame: CGRect, index: Int)
+    func willDisplayPhoto(atIndex: Int)
 }

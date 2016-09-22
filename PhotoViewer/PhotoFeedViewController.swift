@@ -71,5 +71,9 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
         
         self.eventHandler?.photoTapped(fromFrame: frameToOpenFrom, index: indexPath.row)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.eventHandler?.willDisplayPhoto(atIndex: indexPath.row)
+    }
 }
 

@@ -12,4 +12,5 @@ protocol FullscreenPhotoFeedViewEventHandler {
     func viewDidLoad()
     func viewDidLayoutSubviews()
     func photoTappedAtIndex(index: Int)
+    func willDisplayPhoto(atIndex: Int)
 }

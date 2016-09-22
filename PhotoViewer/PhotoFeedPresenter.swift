@@ -13,6 +13,8 @@ class PhotoFeedPresenter: NSObject, PhotoFeedViewEventHandler {
     private let userInterface : PhotoFeedViewInterface
     private let router : PhotoFeedRouter
     
+    private var waitingForData = false
+    
     init(interactor : PhotoFeedInteractor, userInterface : PhotoFeedViewInterface, router: PhotoFeedRouter) {
         self.interactor = interactor
         self.userInterface = userInterface
@@ -36,5 +38,15 @@ class PhotoFeedPresenter: NSObject, PhotoFeedViewEventHandler {
         self.userInterface.makeIndexVisible(index: finalPhotoIndex)
         
         return self.userInterface.rectForCell(atIndex: finalPhotoIndex)
+    }
+    
+    func willDisplayPhoto(atIndex: Int) {
+        if (!self.waitingForData && atIndex > self.interactor.photos.count - 6) {
+            self.waitingForData = true
+            self.interactor.loadMorePhotos(completion: { [weak self] (photos) in
+                self?.userInterface.showPhotos(photos: photos)
+                self?.waitingForData = false
+            })
+        }
     }
 }

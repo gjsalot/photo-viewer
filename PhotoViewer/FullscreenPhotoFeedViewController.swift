@@ -22,12 +22,6 @@ class FullscreenPhotoFeedViewController: UIViewController, FullscreenPhotoFeedVi
         eventHandler?.viewDidLoad()
     }
     
-    override var prefersStatusBarHidden: Bool {
-        get {
-            return true
-        }  
-    }
-    
     // MARK: FullscreenPhotoFeedViewInterface
     
     func showPhotos(photos: [Photo]) {
@@ -73,5 +67,9 @@ class FullscreenPhotoFeedViewController: UIViewController, FullscreenPhotoFeedVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: false)
         eventHandler?.photoTappedAtIndex(index: indexPath.row)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        self.eventHandler?.willDisplayPhoto(atIndex: indexPath.row)
     }
 }
