@@ -33,8 +33,10 @@ class PhotoFeedPresenter: NSObject, PhotoFeedViewEventHandler {
         self.router.presentFullscreenPhotoFeed(fromFrame: fromFrame, initialPhotoIndex: index)
     }
     
-    func fullscreenPhotoFeedDismissedToRect(finalPhotoIndex: Int) -> CGRect {
-        self.userInterface.showPhotos(photos: self.interactor.photos)
+    func fullscreenPhotoFeedDismissedToRect(finalPhotoIndex: Int, loadedMorePhotos: Bool) -> CGRect {
+        if (loadedMorePhotos) {
+            self.userInterface.showPhotos(photos: self.interactor.photos)
+        }
         self.userInterface.makeIndexVisible(index: finalPhotoIndex)
         
         return self.userInterface.rectForCell(atIndex: finalPhotoIndex)

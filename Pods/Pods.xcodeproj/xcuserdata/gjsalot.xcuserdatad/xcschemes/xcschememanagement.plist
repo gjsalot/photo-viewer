@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GreedoLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-PhotoViewer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,7 +27,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>238D8ED6260434CDC6EA6D2F79B0D1D6</key>
+		<key>100D05598B1EBACD70E33B1BD433927E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CD689A9634AFB03A775D530F249C325</key>
 		<dict>
 			<key>primary</key>
 			<true/>

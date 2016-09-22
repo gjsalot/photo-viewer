@@ -10,6 +10,7 @@ import UIKit
 
 enum PhotoSize: Int {
     case cropped440 = 440
+    case uncropped256 = 30
     case uncropped1080 = 1080
 }
 

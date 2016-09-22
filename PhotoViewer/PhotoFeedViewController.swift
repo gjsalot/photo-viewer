@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import GreedoLayout
 
-class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, GreedoCollectionViewLayoutDataSource {
     var eventHandler : PhotoFeedViewEventHandler?
     var photos: [Photo]?
+    
+    var collectionViewSizeCalculator : GreedoCollectionViewLayout!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -19,7 +22,26 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
         
         self.collectionView.register(UINib(nibName: "PhotoFeedCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "PhotoFeedCollectionViewCell")
         
+        // Setup GreedoCollectionViewLayout
+        self.collectionViewSizeCalculator = GreedoCollectionViewLayout(collectionView: self.collectionView)
+        self.collectionViewSizeCalculator.dataSource = self
+        self.collectionViewSizeCalculator.rowMaximumHeight = self.collectionView.bounds.height / 5;
+        self.collectionViewSizeCalculator.fixedHeight = false;
+        
+        let layout = UICollectionViewFlowLayout();
+        layout.minimumInteritemSpacing = 5.0;
+        layout.minimumLineSpacing = 5.0;
+        layout.sectionInset = UIEdgeInsetsMake(10.0, 5.0, 5.0, 5.0);
+        
+        self.collectionView.collectionViewLayout = layout;
+        
         eventHandler?.viewDidLoad()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.collectionViewSizeCalculator.clearCache()
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: PhotoFeedViewInterface
@@ -30,7 +52,9 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
     }
     
     func makeIndexVisible(index: Int) {
-        self.collectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredVertically, animated: false)
+        if (!self.collectionView.indexPathsForVisibleItems.contains(IndexPath(row: index, section: 0))) {
+            self.collectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredVertically, animated: false)
+        }
     }
     
     func rectForCell(atIndex: Int) -> CGRect {
@@ -55,7 +79,7 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 145, height: 145)
+        return self.collectionViewSizeCalculator.sizeForPhoto(at: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -74,6 +98,18 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         self.eventHandler?.willDisplayPhoto(atIndex: indexPath.row)
+    }
+    
+    // MARK: GreedoCollectionViewLayoutDataSource
+    
+    func greedoCollectionViewLayout(_ layout: GreedoCollectionViewLayout!, originalImageSizeAt indexPath: IndexPath!) -> CGSize {
+        // Return the image size to GreedoCollectionViewLayout
+        if (indexPath.row < self.photos!.count) {
+            let photo = self.photos![indexPath.row]
+            return CGSize(width: photo.width, height: photo.height)
+        }
+        
+        return CGSize(width: 0.1, height: 0.1)
     }
 }
 

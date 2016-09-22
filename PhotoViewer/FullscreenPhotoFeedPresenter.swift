@@ -15,6 +15,7 @@ class FullscreenPhotoFeedPresenter: NSObject, FullscreenPhotoFeedViewEventHandle
     private let initialPhotoIndex : Int
     
     private var waitingForData = false
+    private var loadedMorePhotos = false
     
     init(interactor : PhotoFeedInteractor, userInterface : FullscreenPhotoFeedViewInterface, router: PhotoFeedRouter, initialPhotoIndex: Int) {
         self.interactor = interactor
@@ -35,12 +36,13 @@ class FullscreenPhotoFeedPresenter: NSObject, FullscreenPhotoFeedViewEventHandle
     }
     
     func photoTappedAtIndex(index: Int) {
-        self.router.dismissFullscreenPhotoFeedViewController(finalIndex: index)
+        self.router.dismissFullscreenPhotoFeedViewController(finalIndex: index, loadedMorePhotos: self.loadedMorePhotos)
     }
     
     func willDisplayPhoto(atIndex: Int) {
         if (!self.waitingForData && atIndex > self.interactor.photos.count - 3) {
             self.waitingForData = true
+            self.loadedMorePhotos = true
             self.interactor.loadMorePhotos(completion: { [weak self] (photos) in
                 self?.userInterface.showPhotos(photos: photos)
                 self?.waitingForData = false

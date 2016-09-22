@@ -2,15 +2,18 @@ PODS:
   - Alamofire (4.0.0)
   - AlamofireImage (3.0.0):
     - Alamofire (~> 4.0)
+  - GreedoLayout (1.2.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - AlamofireImage (~> 3.0)
+  - GreedoLayout
 
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   AlamofireImage: 6594aa1139a67dcd36cde6da79ea4e5b318e60fb
+  GreedoLayout: b1a1adc6ed5f281353225e3eb21d18cedee8e513
 
-PODFILE CHECKSUM: 644f460cca7aea0892fd6296b41ec4bf39775016
+PODFILE CHECKSUM: e9e7878f70d067057fe2cea48d19dc5857faaa0e
 
 COCOAPODS: 1.1.0.rc.2

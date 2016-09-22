@@ -52,9 +52,9 @@ class PhotoFeedRouter: NSObject {
         self.photoFeedViewController.present(self.fullscreenPhotoFeedViewController, animated: true)
     }
     
-    func dismissFullscreenPhotoFeedViewController(finalIndex: Int) {
+    func dismissFullscreenPhotoFeedViewController(finalIndex: Int, loadedMorePhotos: Bool) {
         // Get the frame of the cell for the photo at this index, and tell the animation to use it.
-        let closingFrame = self.photoFeedPresenter.fullscreenPhotoFeedDismissedToRect(finalPhotoIndex: finalIndex)
+        let closingFrame = self.photoFeedPresenter.fullscreenPhotoFeedDismissedToRect(finalPhotoIndex: finalIndex, loadedMorePhotos: loadedMorePhotos)
         transitionDelegate.closingFrame = closingFrame
         self.photoFeedViewController.dismiss(animated: true)
     }

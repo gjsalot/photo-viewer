@@ -8,5 +8,6 @@ target 'PhotoViewer' do
   # Pods for PhotoViewer
   pod 'Alamofire', '~> 4.0'
   pod 'AlamofireImage', '~> 3.0'
+  pod 'GreedoLayout'
 
 end

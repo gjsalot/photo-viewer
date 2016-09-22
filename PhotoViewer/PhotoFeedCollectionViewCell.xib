@@ -15,19 +15,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ReY-z9-GFf">
-                        <constraints>
-                            <constraint firstAttribute="height" constant="134" id="QgW-oj-gT0"/>
-                            <constraint firstAttribute="width" constant="134" id="jG7-FL-34q"/>
-                        </constraints>
-                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ReY-z9-GFf"/>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="ReY-z9-GFf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="8ny-T5-Mag"/>
-                <constraint firstAttribute="bottom" secondItem="ReY-z9-GFf" secondAttribute="bottom" constant="8" id="Kl4-mw-89f"/>
-                <constraint firstAttribute="trailing" secondItem="ReY-z9-GFf" secondAttribute="trailing" constant="8" id="VW9-bH-umH"/>
-                <constraint firstItem="ReY-z9-GFf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="aYk-2F-BQW"/>
+                <constraint firstItem="ReY-z9-GFf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8ny-T5-Mag"/>
+                <constraint firstAttribute="bottom" secondItem="ReY-z9-GFf" secondAttribute="bottom" id="Kl4-mw-89f"/>
+                <constraint firstAttribute="trailing" secondItem="ReY-z9-GFf" secondAttribute="trailing" id="VW9-bH-umH"/>
+                <constraint firstItem="ReY-z9-GFf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="aYk-2F-BQW"/>
             </constraints>
             <size key="customSize" width="150" height="150"/>
             <connections>
