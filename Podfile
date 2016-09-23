@@ -11,3 +11,11 @@ target 'PhotoViewer' do
   pod 'GreedoLayout'
 
 end
+
+target 'PhotoViewerTests' do
+  use_frameworks!
+
+  pod 'Alamofire', '~> 4.0'
+  pod 'AlamofireImage', '~> 3.0'
+  pod 'GreedoLayout'
+end
