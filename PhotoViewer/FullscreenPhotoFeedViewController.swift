@@ -16,6 +16,8 @@ class FullscreenPhotoFeedViewController: UIViewController, FullscreenPhotoFeedVi
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // MARK: View Lifecycle Calls
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,19 +26,10 @@ class FullscreenPhotoFeedViewController: UIViewController, FullscreenPhotoFeedVi
         eventHandler?.viewDidLoad()
     }
     
-    func updateFlowLayout() {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = 0
-        flowLayout.minimumLineSpacing = 0
-        flowLayout.itemSize = CGSize(width: self.collectionView.bounds.width, height: self.collectionView.bounds.height)
-        self.collectionView.isPagingEnabled = true
-        self.collectionView.collectionViewLayout = flowLayout
-    }
-    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
+        // On view size chance (ex. rotation), ensure the currently visible image remains visible
         self.indexToShowOnLayout = IndexPath(row: self.collectionView.indexPathsForVisibleItems[0].row, section: 0)
     }
     
@@ -52,6 +45,18 @@ class FullscreenPhotoFeedViewController: UIViewController, FullscreenPhotoFeedVi
             self.indexToShowOnLayout = nil
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
+    }
+    
+    // MARK: Helper Functions
+    
+    func updateFlowLayout() {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.itemSize = CGSize(width: self.collectionView.bounds.width, height: self.collectionView.bounds.height)
+        self.collectionView.isPagingEnabled = true
+        self.collectionView.collectionViewLayout = flowLayout
     }
     
     // MARK: FullscreenPhotoFeedViewInterface

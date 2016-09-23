@@ -17,12 +17,29 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // MARK: View Lifecycle Calls
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.collectionView.register(UINib(nibName: "PhotoFeedCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "PhotoFeedCollectionViewCell")
         
-        // Setup GreedoCollectionViewLayout
+        self.setupGreedoLayout()
+        
+        eventHandler?.viewDidLoad()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        // Clear the size cache on view size change (ex. on rotate)
+        self.collectionViewSizeCalculator.clearCache()
+        self.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    // MARK: Helper Functions
+    
+    private func setupGreedoLayout() {
         self.collectionViewSizeCalculator = GreedoCollectionViewLayout(collectionView: self.collectionView)
         self.collectionViewSizeCalculator.dataSource = self
         self.collectionViewSizeCalculator.rowMaximumHeight = self.collectionView.bounds.height / 5;
@@ -34,15 +51,6 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
         layout.sectionInset = UIEdgeInsetsMake(10.0, 5.0, 5.0, 5.0);
         
         self.collectionView.collectionViewLayout = layout;
-        
-        eventHandler?.viewDidLoad()
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        self.collectionViewSizeCalculator.clearCache()
-        self.collectionView.collectionViewLayout.invalidateLayout()
     }
     
     // MARK: PhotoFeedViewInterface

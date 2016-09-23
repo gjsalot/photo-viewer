@@ -29,9 +29,13 @@ class PhotoFeedRouter: NSObject {
         self.rootRouter.showRootViewControllerInWindow(viewController: getPhotoFeedViewController(), window: window)
     }
     
-    private func getPhotoFeedViewController() -> UIViewController {
+    private func getViewControllerFromMainStoryboard(withIdentifier: String) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        self.photoFeedViewController = storyboard.instantiateViewController(withIdentifier: "PhotoFeedViewController") as! PhotoFeedViewController
+        return storyboard.instantiateViewController(withIdentifier: withIdentifier)
+    }
+    
+    private func getPhotoFeedViewController() -> UIViewController {
+        self.photoFeedViewController = getViewControllerFromMainStoryboard(withIdentifier: "PhotoFeedViewController") as! PhotoFeedViewController
         self.photoFeedPresenter = PhotoFeedPresenter(interactor: photoFeedInteractor, userInterface: self.photoFeedViewController, router: self)
         self.photoFeedViewController.eventHandler = self.photoFeedPresenter
         
@@ -39,8 +43,7 @@ class PhotoFeedRouter: NSObject {
     }
     
     func presentFullscreenPhotoFeed(fromFrame: CGRect, initialPhotoIndex: Int) {
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        self.fullscreenPhotoFeedViewController = storyboard.instantiateViewController(withIdentifier: "FullscreenPhotoFeedViewController") as! FullscreenPhotoFeedViewController
+        self.fullscreenPhotoFeedViewController = getViewControllerFromMainStoryboard(withIdentifier: "FullscreenPhotoFeedViewController") as! FullscreenPhotoFeedViewController
         self.fullscreenPhotoFeedPresenter = FullscreenPhotoFeedPresenter(interactor: photoFeedInteractor, userInterface: self.fullscreenPhotoFeedViewController, router: self, initialPhotoIndex: initialPhotoIndex)
         self.fullscreenPhotoFeedViewController.eventHandler = self.fullscreenPhotoFeedPresenter
         
