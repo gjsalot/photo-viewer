@@ -381,7 +381,6 @@
 				TargetAttributes = {
 					0753F8601D91A54700876312 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 28RDNJ975T;
 						ProvisioningStyle = Automatic;
 					};
 					079E79FA1D9478D2001E115D = {
@@ -714,7 +713,7 @@
 			baseConfigurationReference = AE05ED244B797A2D3D19E937 /* Pods-PhotoViewer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 28RDNJ975T;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PhotoViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gjsalot.ios.PhotoViewer;
@@ -728,7 +727,7 @@
 			baseConfigurationReference = ADE16900B7F5E6492E4AEF7C /* Pods-PhotoViewer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 28RDNJ975T;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PhotoViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gjsalot.ios.PhotoViewer;
