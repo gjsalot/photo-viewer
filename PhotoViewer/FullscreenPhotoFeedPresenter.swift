@@ -31,7 +31,7 @@ class FullscreenPhotoFeedPresenter: NSObject, FullscreenPhotoFeedViewEventHandle
         self.userInterface.showPhotos(photos: photos)
     }
     
-    func viewDidLayoutSubviews() {
+    func collectionViewLoaded() {
         self.userInterface.makeIndexVisible(index: self.initialPhotoIndex)
     }
     

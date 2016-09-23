@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -94,9 +93,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tMQ-EB-BLO" firstAttribute="top" secondItem="K4K-gq-PBZ" secondAttribute="bottom" id="543-I5-dfN"/>
-                            <constraint firstItem="K4K-gq-PBZ" firstAttribute="top" secondItem="kOw-6d-3Vn" secondAttribute="bottom" constant="-20" id="CxM-Vb-nag"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="K4K-gq-PBZ" secondAttribute="trailing" constant="-16" id="rUK-O7-w0a"/>
-                            <constraint firstItem="K4K-gq-PBZ" firstAttribute="leading" secondItem="7AL-1a-S7r" secondAttribute="leadingMargin" constant="-16" id="zOg-3I-1XN"/>
+                            <constraint firstItem="K4K-gq-PBZ" firstAttribute="top" secondItem="kOw-6d-3Vn" secondAttribute="bottom" id="CxM-Vb-nag"/>
+                            <constraint firstAttribute="trailing" secondItem="K4K-gq-PBZ" secondAttribute="trailing" id="rUK-O7-w0a"/>
+                            <constraint firstItem="K4K-gq-PBZ" firstAttribute="leading" secondItem="7AL-1a-S7r" secondAttribute="leading" id="zOg-3I-1XN"/>
                         </constraints>
                     </view>
                     <connections>

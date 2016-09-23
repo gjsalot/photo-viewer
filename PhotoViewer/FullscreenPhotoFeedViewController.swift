@@ -11,6 +11,8 @@ import UIKit
 class FullscreenPhotoFeedViewController: UIViewController, FullscreenPhotoFeedViewInterface, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     var eventHandler : FullscreenPhotoFeedViewEventHandler?
     var photos: [Photo]?
+    var collectionViewLoaded = false
+    var indexToShowOnLayout : IndexPath?
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -22,15 +24,7 @@ class FullscreenPhotoFeedViewController: UIViewController, FullscreenPhotoFeedVi
         eventHandler?.viewDidLoad()
     }
     
-    // MARK: FullscreenPhotoFeedViewInterface
-    
-    func showPhotos(photos: [Photo]) {
-        self.photos = photos
-        self.collectionView.reloadData()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        // TODO: Implement custom UICollectionViewLayout so this does not need to happen on every layout change.
+    func updateFlowLayout() {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumInteritemSpacing = 0
@@ -38,12 +32,37 @@ class FullscreenPhotoFeedViewController: UIViewController, FullscreenPhotoFeedVi
         flowLayout.itemSize = CGSize(width: self.collectionView.bounds.width, height: self.collectionView.bounds.height)
         self.collectionView.isPagingEnabled = true
         self.collectionView.collectionViewLayout = flowLayout
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
-        eventHandler?.viewDidLayoutSubviews()
+        self.indexToShowOnLayout = IndexPath(row: self.collectionView.indexPathsForVisibleItems[0].row, section: 0)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        updateFlowLayout()
+        
+        if (!self.collectionViewLoaded) {
+            eventHandler?.collectionViewLoaded()
+            self.collectionViewLoaded = true
+        }
+        
+        if let indexPath = self.indexToShowOnLayout {
+            self.indexToShowOnLayout = nil
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        }
+    }
+    
+    // MARK: FullscreenPhotoFeedViewInterface
+    
+    func showPhotos(photos: [Photo]) {
+        self.photos = photos
+        self.collectionView.reloadData()
     }
     
     func makeIndexVisible(index: Int) {
-        self.collectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: false)
+        self.indexToShowOnLayout = IndexPath(row: index, section: 0)
     }
     
     // MARK: UICollectionViewDataSource

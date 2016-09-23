@@ -38,8 +38,9 @@ class PhotoFeedViewController: UIViewController, PhotoFeedViewInterface, UIColle
         eventHandler?.viewDidLoad()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
         self.collectionViewSizeCalculator.clearCache()
         self.collectionView.collectionViewLayout.invalidateLayout()
     }

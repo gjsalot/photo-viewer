@@ -10,7 +10,7 @@ import UIKit
 
 protocol FullscreenPhotoFeedViewEventHandler {
     func viewDidLoad()
-    func viewDidLayoutSubviews()
+    func collectionViewLoaded()
     func photoTappedAtIndex(index: Int)
     func willDisplayPhoto(atIndex: Int)
 }
